@@ -34,3 +34,5 @@ docker_run="$docker_run -d -p $INPUT_HOST_PORT:$INPUT_CONTAINER_PORT mysql:$INPU
 docker_run="$docker_run --character-set-server=$INPUT_CHARACTER_SET_SERVER --collation-server=$INPUT_COLLATION_SERVER"
 
 sh -c "$docker_run"
+
+docker exec $INPUT_CONTAINER_NAME mysql -u root --password="$INPUT_MYSQL_PASSWORD" -D $INPUT_MYSQL_DATABASE -h localhost --port=$INPUT_CONTAINER_PORT --protocol=TCP "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';"
